@@ -1,29 +1,48 @@
 import React from 'react';
-import {SearchbarStyles } from './Searchbar.styled';
-
+import {SearchbarStyles, SearchForm, SearchFormButton, SearchFormButtonLabel, SearchFormInput } from './Searchbar.styled';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export class Searchbar extends React.Component {
   state = {
-    
+    searchImageTitle: ''
   };
+
+  handleSearchbarChange = (event) => {
+    this.setState({
+      searchImageTitle: event.currentTarget.value.toLowerCase()
+    });
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (this.state.searchImageTitle.trim() === '') {
+      return toast("Enter what you are looking for");
+      
+    }
+    this.props.onSubmit(this.state.searchImageTitle);
+    this.setState({searchImageTitle: ''})
+  }
 
   render() {
     return (
-      <SearchbarStyles class="searchbar">
-  <form class="form">
-    <button type="submit" class="button">
-      <span class="button-label">Search</span>
-    </button>
+    <SearchbarStyles>
+      <SearchForm onSubmit={this.handleSubmit}>
+        <SearchFormButton type="submit">     
+        <SearchFormButtonLabel>Search</SearchFormButtonLabel>
+        </SearchFormButton>
 
-    <input
-      class="input"
-      type="text"
-      autocomplete="off"
-      autoFocus
-      placeholder="Search images and photos"
-    />
-  </form>
-</SearchbarStyles>
+        <SearchFormInput
+          value={this.state.searchImageTitle}
+          onChange={this.handleSearchbarChange}
+          type="text"
+          autoComplete="off"
+          autoFocus
+          placeholder="Search images and photos"
+        />
+      </SearchForm>
+    </SearchbarStyles>
     );
   }
 }
