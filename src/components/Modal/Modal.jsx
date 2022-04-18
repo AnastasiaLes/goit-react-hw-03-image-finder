@@ -1,16 +1,18 @@
 import React from 'react';
+import { Overlay, ModalContainer } from './Modal.styled';
 
 export class Modal extends React.Component {
-// state{
-
-// }
+    
     render() {
-        return (
-            <div class="overlay">
-            <div class="modal">
-                <img src="" alt="" />
-            </div>
-            </div> 
-        )
-    }
+        
+         return (
+        <Overlay>
+        <ModalContainer>
+            <img src={this.props.largeImage } alt={this.props.tag} />
+        </ModalContainer>
+        </Overlay> 
+    )
+    
+   
+}
 }

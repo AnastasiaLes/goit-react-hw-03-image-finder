@@ -1,5 +1,4 @@
 import React from 'react';
-// import { GalleryItem, GalleryImage } from './ImageGalleryItem.styled';
 import { Spiner } from 'components/Loader/Loader';
 import { LoadMoreButton } from 'components/Button/Button';
 import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem'
@@ -38,21 +37,21 @@ export class ImageGallery extends React.Component {
 }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.props.imageName);
+    // console.log(this.props.imageName);
     if (prevProps.imageName !== this.props.imageName) {
       this.getImages()
     }
   }
 
   handleLoadMore = page => {
-    console.log(page);
+    // console.log(page);
     this.getImages();
   }
 
-  handleImageClick = (event) => {
-    event.preventDefault();
-    console.log(event.currentTarget.bigImg);
-  }
+  // handleImageClick = largeImage => {
+  //   console.log(largeImage);
+  //   console.log('Yes');
+  // }
   
   render() {
     if (this.state.status === 'idle') {
@@ -73,10 +72,12 @@ export class ImageGallery extends React.Component {
               id={image.id}
               webformatURL={image.webformatURL}
               largeImageURL={image.largeImageURL}
-              onClick={this.handleImageClick} />
+              tag={image.tags}
+              onClick={() => this.props.onImageClick(image.largeImageURL, image.tags)} />
             ))}
-         <LoadMoreButton onClick={this.handleLoadMore}/>
+          <LoadMoreButton onClick={this.handleLoadMore} />
         </ImageGalleryStyles>
+        
       );
     }
  } 

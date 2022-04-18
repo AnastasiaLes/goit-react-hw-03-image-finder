@@ -1,16 +1,17 @@
 import React from 'react';
 import { GalleryItem, GalleryImage } from '../ImageGallery/ImageGallery.styled';
+// import { Modal } from 'components/Modal/Modal';
 
-
-export const ImageGalleryItem = ({id, webformatURL }) => {
+export const ImageGalleryItem = ({id, webformatURL, onClick, tag }) => {
   return (
    <GalleryItem key={id}>
       <GalleryImage
         key={id}
         src={webformatURL}
-        alt="{image.hits.id}"
-        // onClick={this.handleImageClick}
+        alt={tag}
+        onClick={onClick}
       />
-            </GalleryItem>
+      {/* <Modal largeImageURL={largeImageURL}/> */}
+    </GalleryItem>
   );
 };

@@ -1,4 +1,3 @@
-// import { SpinnerCircular } from 'spinners-react';
 import { Loader, LoaderContainer } from './Loader.styled';
 
 export const Spiner = () => {

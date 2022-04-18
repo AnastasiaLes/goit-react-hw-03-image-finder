@@ -2,39 +2,41 @@ import React from 'react';
 import { Searchbar } from '../Searchbar/Searchbar';
 import { ImageGallery } from '../ImageGallery/ImageGallery';
 import { ToastContainer } from 'react-toastify';
-// import {ImageGallery } from '../ImageGallery/ImageGallery'
-// import { LoadMoreButton } from 'components/Button/Button';
-// const URL = 'https://pixabay.com/api/?key=25256496-da285e9dc7351a7d44328e376&q=cat';
+import { Modal } from 'components/Modal/Modal';
 
 export class App extends React.Component {
   state = {
     page: 1,
-    imageName: ''
+    imageName: '',
+    largeImage: '',
+    tags: '',
+    visible: false
   };
   
   handleFormSubmit = imageName => {
     this.setState({imageName})
   }
 
-  
-
-  // handleButton = (event) => {
-  //   event.preventDefault();
-  //   this.setState(prevState => { return {page: prevState.page + 1 }},)
-  //   console.log('Click!');
-  //   this.props.onClick(this.state.page);
-  // }
+  handleImageClick = (largeImage, tags) => {
+    console.log(largeImage);
+    console.log('Yes');
+    this.setState({ largeImage, tags, visible: true });
+    console.log(this.state.largeImage)
+  }
 
     render() {
     return (
       <div>
         <Searchbar onSubmit={this.handleFormSubmit} />
         <ImageGallery
-          // page={this.state.page}
-          imageName={this.state.imageName}/>
-        {/* <ImageGallery
-           /> */}
-        {/* <LoadMoreButton onClick={this.handleLoadMore}/> */}
+          imageName={this.state.imageName}
+          onImageClick={this.handleImageClick} />
+        
+        {this.state.visible && 
+        <Modal LargeImage={this.state.largeImage}
+          tags={this.state.tags}/>
+        }
+        
         <ToastContainer autoClose={3000} />
       </div>
     );

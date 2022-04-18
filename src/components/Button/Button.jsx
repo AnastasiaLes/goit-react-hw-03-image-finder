@@ -9,9 +9,6 @@ state = {
     
     handleLoadMore = (event) => {
         event.preventDefault();
-        // const newPage = this.state.page + 1;
-        // this.setState({ page: newPage });
-
         this.props.onClick(this.state.page);
     }
     
