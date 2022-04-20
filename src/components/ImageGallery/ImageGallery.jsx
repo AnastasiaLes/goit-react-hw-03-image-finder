@@ -39,9 +39,9 @@ export class ImageGallery extends React.Component {
      
   
 getNewImages() {
-          const URL = `https://pixabay.com/api/?key=25256496-da285e9dc7351a7d44328e376&q=${this.props.imageName}&image_type=photo&orientation=horizontal&page=${this.state.page}&per_page=12`
+          const URL = `https://pixabay.com/api/?key=25256496-da285e9dc7351a7d44328e376&q=${this.props.imageName}&image_type=photo&orientation=horizontal&page=1&per_page=12`
     
-    this.setState({ status: 'pending' });
+    this.setState({ page: 1, status: 'pending' });
       fetch(URL)
           .then(response => {
             if (response.ok) {
