@@ -1,10 +1,12 @@
 import React from 'react';
 import {SearchbarStyles, SearchForm, SearchFormButton, SearchFormButtonLabel, SearchFormInput } from './Searchbar.styled';
 import { toast } from 'react-toastify';
+import { ImSearch } from "react-icons/im";
 import 'react-toastify/dist/ReactToastify.css';
 
 export class Searchbar extends React.Component {
   state = {
+    imageList: [],
     searchImageTitle: ''
   };
 
@@ -19,9 +21,8 @@ export class Searchbar extends React.Component {
 
     if (this.state.searchImageTitle.trim() === '') {
       return toast("Enter what you are looking for");
-      
     }
-    this.props.onSubmit(this.state.searchImageTitle);
+    this.props.onSubmit(this.state.searchImageTitle, this.state.imageList);
     this.setState({searchImageTitle: ''})
   }
 
@@ -29,8 +30,8 @@ export class Searchbar extends React.Component {
     return (
     <SearchbarStyles>
       <SearchForm onSubmit={this.handleSubmit}>
-        <SearchFormButton type="submit">     
-        <SearchFormButtonLabel>Search</SearchFormButtonLabel>
+        <SearchFormButton type="submit"> <ImSearch />    
+        <SearchFormButtonLabel>  Search</SearchFormButtonLabel>
         </SearchFormButton>
 
         <SearchFormInput

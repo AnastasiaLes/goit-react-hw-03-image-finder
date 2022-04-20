@@ -4,9 +4,8 @@ import { GalleryItem, GalleryImage } from '../ImageGallery/ImageGallery.styled';
 
 export const ImageGalleryItem = ({id, webformatURL, onClick, tag }) => {
   return (
-   <GalleryItem key={id}>
+   <GalleryItem>
       <GalleryImage
-        key={id}
         src={webformatURL}
         alt={tag}
         onClick={onClick}

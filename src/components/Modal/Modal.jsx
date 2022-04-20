@@ -6,13 +6,11 @@ export class Modal extends React.Component {
     render() {
         
          return (
-        <Overlay>
+        <Overlay onClick={this.props.onClose}>
         <ModalContainer>
-            <img src={this.props.largeImage } alt={this.props.tag} />
+            <img src={this.props.LargeImage} alt={this.props.tag} />
         </ModalContainer>
         </Overlay> 
     )
-    
-   
 }
 }
