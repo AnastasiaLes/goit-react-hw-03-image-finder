@@ -1,5 +1,4 @@
 import React from 'react';
-// import { toast } from 'react-toastify';
 import { Searchbar } from '../Searchbar/Searchbar';
 import { ImageGallery } from '../ImageGallery/ImageGallery';
 import { ToastContainer } from 'react-toastify';
@@ -18,22 +17,28 @@ export class App extends React.Component {
   
   handleFormSubmit = (imageName, imageList) => {
     this.setState({ imageName, imageList })
-    //  this.setState({ page: 1, imageName, imageList: [] })
   }
 
   handleImageClick = (largeImage, tags) => {
-    // console.log(largeImage);
-    // console.log('Yes');
     this.setState({ largeImage, tags, visible: true });
-    // console.log(this.state.largeImage)
   }
 
+componentDidMount() {
+    window.addEventListener('keydown', this.handleKeyDown);
+  }
+  handleKeyDown = event => {
+   if ( event.code === 'Escape') {
+      this.setState({visible: false})
+    }
+}
+
+
   onModalClose = event => {
-    // event.preventDefsult();
+    console.log(event.code);
+    event.preventDefault();
     if (event.target === event.currentTarget) {
       this.setState({visible: false})
     }
-    // console.log(this.state.largeImage);
   }
 
     render() {

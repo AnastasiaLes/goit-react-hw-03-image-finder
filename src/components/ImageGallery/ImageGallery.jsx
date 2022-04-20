@@ -1,8 +1,11 @@
 import React from 'react';
+import * as Scroll from 'react-scroll';
 import { Spiner } from 'components/Loader/Loader';
 import { LoadMoreButton } from 'components/Button/Button';
 import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem'
 import { ImageGalleryStyles } from 'components/ImageGalleryItem/ImageGalleryItem.styled';
+
+const scroll = Scroll.animateScroll;
 
 export class ImageGallery extends React.Component {
   state = {
@@ -11,37 +14,6 @@ export class ImageGallery extends React.Component {
     error: null,
     status: 'idle'
   }
-
-//   getImages = () => {
-//     const URL = `https://pixabay.com/api/?key=25256496-da285e9dc7351a7d44328e376&q=${this.props.imageName}&image_type=photo&orientation=horizontal&page=${this.state.page}&per_page=12`
-    
-//     this.setState({ status: 'pending' });
-//       setTimeout(() => {
-//         fetch(URL)
-//           .then(response => {
-//             if (response.ok) {
-//               return response.json()
-//             }
-//             return Promise.reject(
-//               new Error(`Can't find ${this.props.imageName} images`),
-//             );
-//           })
-//           .then(images => this.setState(prevState =>
-//           ({
-//             imageList: [...prevState.imageList, ...images.hits],
-//             // page: prevState.page + 1,
-//             status: 'resolved'
-//           })))
-//           .catch(error => this.setState({ error, status: 'rejected' }));
-//       }, 1000);
-// }
-
-  
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevProps.imageName !== this.props.imageName || prevState.page !== this.state.page) {
-  //     this.getImages()
-  //   }
-  // }
 
   getNextImages() {
           const URL = `https://pixabay.com/api/?key=25256496-da285e9dc7351a7d44328e376&q=${this.props.imageName}&image_type=photo&orientation=horizontal&page=${this.state.page}&per_page=12`
@@ -65,9 +37,6 @@ export class ImageGallery extends React.Component {
           .catch(error => this.setState({ error, status: 'rejected' }));
       }
      
-  fetchImg() {
-  
-}
   
 getNewImages() {
           const URL = `https://pixabay.com/api/?key=25256496-da285e9dc7351a7d44328e376&q=${this.props.imageName}&image_type=photo&orientation=horizontal&page=${this.state.page}&per_page=12`
@@ -98,11 +67,11 @@ getNewImages() {
       this.getNextImages() 
     }
    }
-  
 
   handleLoadMore = (event) => {
     event.preventDefault();
     this.setState(prevState => ({ page: prevState.page + 1 }));
+    scroll.scrollToBottom();
     // console.log('Click!');
   }
 
