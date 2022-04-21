@@ -7,7 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 export class Searchbar extends React.Component {
   state = {
     imageList: [],
-    searchImageTitle: ''
+    searchImageTitle: '',
+    page: 1
   };
 
   handleSearchbarChange = (event) => {
@@ -22,7 +23,7 @@ export class Searchbar extends React.Component {
     if (this.state.searchImageTitle.trim() === '') {
       return toast("Enter what you are looking for");
     }
-    this.props.onSubmit(this.state.searchImageTitle, this.state.imageList);
+    this.props.onSubmit(this.state.searchImageTitle );
     this.setState({searchImageTitle: ''})
   }
 

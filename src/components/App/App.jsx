@@ -25,12 +25,12 @@ export class App extends React.Component {
   componentDidUpdate(_, prevState) {
     if (prevState.imageName !== this.state.imageName || prevState.page !== this.state.page) {
       this.getImages()
-      console.log(prevState.imageName);
+      // console.log(prevState.imageName);
     } 
   }
   
-  handleFormSubmit = (imageName, imageList) => {
-      this.setState({ imageName, imageList, page: 1})
+  handleFormSubmit = (imageName) => {
+      this.setState({ imageName, imageList: [], page: 1 })
   }
   
   getImages() {
