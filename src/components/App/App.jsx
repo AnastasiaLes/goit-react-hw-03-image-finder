@@ -4,7 +4,7 @@ import { ImageGallery } from '../ImageGallery/ImageGallery';
 import { ToastContainer } from 'react-toastify';
 import { Modal } from 'components/Modal/Modal';
 import { AppContainer } from './App.styled';
-import { fetchImages } from 'components/Services/api';
+import { fetchImages } from 'Services/api';
 import { LoadMoreButton } from 'components/Button/Button';
 import * as Scroll from 'react-scroll';
 
@@ -19,7 +19,8 @@ export class App extends React.Component {
     tags: '',
     imageList: [],
     visible: false,
-    status: 'idle'
+    status: 'idle',
+    error: ''
   };
   
   componentDidUpdate(_, prevState) {
@@ -36,13 +37,15 @@ export class App extends React.Component {
   getImages() {
     this.setState({ status: 'pending' });
           fetchImages(this.state.imageName, this.state.page)
-            .then(images => 
-              this.setState(prevState =>
+            .then(images => {
+             images.hits.length > 0 ? this.setState(prevState =>
           ({
             imageList: [...prevState.imageList, ...images.hits],
             status: 'resolved'
               })
-              )
+             )
+               : this.setState({ status: 'rejected' })
+            }
             )
           .catch(error => this.setState({ error, status: 'rejected' }));
       }
@@ -79,9 +82,11 @@ export class App extends React.Component {
       <AppContainer>
         <Searchbar onSubmit={this.handleFormSubmit} />
         <ImageGallery
+          imageName={this.state.imageName}
           status={this.state.status}
           imageList={this.state.imageList}
-          onImageClick={this.handleImageClick} />
+          onImageClick={this.handleImageClick}
+          error={this.state.error} />
         
         {this.state.visible && 
           <Modal

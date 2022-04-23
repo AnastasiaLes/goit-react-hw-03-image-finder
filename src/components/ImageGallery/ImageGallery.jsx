@@ -14,7 +14,7 @@ export class ImageGallery extends React.Component {
       return <Spiner />
     }
     if (this.props.status === 'rejected') {
-      return <h1> {this.state.error.message} </h1>
+      return <h1> Can't find "{this.props.imageName}" images</h1>
     }
     if (this.props.status === 'resolved') {
       return (
